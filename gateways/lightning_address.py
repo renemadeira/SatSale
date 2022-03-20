@@ -63,10 +63,10 @@ def add_ln_address_decorators(app, api, node):
             description_hash = hashlib.sha256(metadata.encode()).digest()
 
             try:
-                invoice, _ = node.create_lnd_invoice(
+                invoice, _ = node.create_invoice(
                     amount_btc,
-                    memo="lightning address payment",
-                    description_hash=description_hash,
+                    "lightning address payment",
+                    description_hash=str(description_hash),
                 )
                 logging.info("Responding with invoice {}".format(invoice))
                 return {"pr": invoice, "routes": []}
